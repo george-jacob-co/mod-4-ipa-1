@@ -38,24 +38,14 @@ social_graph = {
 
 def relationship_status(from_member, to_member, social_graph):
         
-    from_member_following = social_graph[from_member]["following"]
-    to_member_following = social_graph[to_member]["following"]
-        
-    for i in from_member_following:
-            if i == to_member:
-                for j, k in enumerate(to_member_following):
-                        if k == from_member:
-                            return "friends"
-                        else:
-                            continue
-                return "follower"
-            else:
-                continue
-    for k in to_member_following:
-            if k == from_member:
-                return "followed by"
-            else:
-                return "no relationship"
+    if to_member in social_graph[from_member]["following"] and from_member in social_graph[to_member]["following"]:
+        return "friends"
+    elif to_member in social_graph[from_member]["following"]:
+        return "follower"
+    elif from_member in social_graph[to_member]["following"]:
+        return "followed by"
+    else: 
+        return "no relationship"
             
 board1 = [
 ['X','X','O'],
